@@ -70,6 +70,7 @@ p {
 .mt__container {
   height: 100vh;
   width: 100vw;
+  display: flex;
 }
 .mt__inner-golden-section-xl {
   width: 61.5%;
@@ -159,15 +160,90 @@ p {
 .mt__game {
   padding: 28px;
   background: var(--mt-green);
+  position: relative;
 }
 .mt__timer-container--line {
   border-right: 1px solid var(--mt-blue);
 }
 .mt__timer-wrapper {
+  height: 100vh;
+  position: relative;
 }
 .mt__timer {
   font-weight: 900;
+  position: relative;
+  top: 200px;
+}
+.number-card-container {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.numbers-card-wrapper {
+  width: 35%;
+}
+.numbers-card {
+  width: 100%;
+  aspect-ratio: 16/7;
+  background: var(--mt-light-green);
+  box-shadow: 0px 8px 7px rgba(100, 125, 112, 0.8);
+  border-radius: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.inputs-row,
+.numbers-row {
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+}
+.numbers-row p {
+  font-size: 1.618em;
+  font-weight: 600;
+  color: var(--mt-blue);
+}
+.inputs-row input {
+  width: 15%;
+  border: 1px solid var(--mt-green);
+  border-radius: 8px;
+  background: var(--mt-light-green);
+  padding: 4px;
+  color: var(--mt-blue);
+  text-align: center;
+}
+.result-row {
+  text-align: center;
+}
+.result-row h3 {
+  font-weight: 800;
+  color: var(--mt-blue);
+}
+.result-row p {
+  font-weight: 300;
+  color: var(--mt-green);
+}
+.card-btn-wrapper {
+  width: 100%;
+  text-align: center;
+  margin-top: 20px;
+}
+.card-btn {
+  background: var(--mt-blue);
+  color: var(--mt-light-green);
+  font-weight: 800;
+  box-shadow: 0px 6px 6px #4d6056;
+  transition: background 350ms ease-out;
+}
+.card-btn:hover {
+  background: var(--mt-dark-blue);
+}
+
+.back-to-cover {
   position: absolute;
+  bottom: 26px;
+  left: 26px;
 }
 /* ----------- / Game ---------- */
 /* ------------------ / Sections ------------------ */
