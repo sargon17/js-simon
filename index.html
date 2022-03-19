@@ -43,7 +43,7 @@
         <div class="mt__inner-golden-section-lg mt__cover__play-section">
             <div class="mt__row vh-100">
                 <div class="play-btn-container">
-                    <a class="play-btn" href="#game">
+                    <a class="play-btn" href="#game" id="playBtn">
                         <img src="./img/Play btn.png" alt="">
                     </a>
                 </div>
@@ -65,29 +65,29 @@
     <div class="mt__container mt__game" id="game">
         <div class="mt__inner-golden-section-lg mt__timer-container mt__timer-container--line ">
             <div class="mt__timer-wrapper">
-                <p class="mt__fs-xl mt__tc-light-green mt__timer" id="timerDom">00:30</p>
+                <p class="mt__fs-xl mt__tc-light-green mt__timer" id="timerDom">00:00</p>
             </div>
         </div>
         <div class="mt__inner-golden-section-xl number-card-container">
             <div class="numbers-card-wrapper">
                 <div class="numbers-card">
-                    <div class="numbers-row" id="numbersRow">
+                    <div class="numbers-row d-none" id="numbersRow">
                     </div>
-                    <div class="inputs-row d-none">
+                    <div class="inputs-row d-none" id="inputsRow">
                         <input type="text" name="" id="number-1">
                         <input type="text" name="" id="number-2">
                         <input type="text" name="" id="number-3">
                         <input type="text" name="" id="number-4">
                         <input type="text" name="" id="number-5">
                     </div>
-                    <div class="result-row d-none">
-                        <h3>Great you Won</h3>
-                        <p>5 of 5 right numbers</p>
+                    <div class="result-row" id="resultRow">
+                        <h3>Game start in 0</h3>
+                        <p></p>
 
                     </div>
                 </div>
                 <div class="card-btn-wrapper">
-                    <button class="card-btn" id="cardBtnSubmit">Submit</button>
+                    <button class="card-btn opacity-0" id="cardBtnSubmit">Submit</button>
                     <button class="card-btn d-none" id="cardBtnRestart">Restart</button>
                 </div>
             </div>

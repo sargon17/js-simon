@@ -212,6 +212,7 @@ p {
   padding: 4px;
   color: var(--mt-blue);
   text-align: center;
+  transition: all 1350ms ease-out;
 }
 .result-row {
   text-align: center;
@@ -234,8 +235,9 @@ p {
   color: var(--mt-light-green);
   font-weight: 800;
   box-shadow: 0px 6px 6px #4d6056;
-  transition: background 350ms ease-out;
+  transition: all 350ms ease-out;
 }
+
 .card-btn:hover {
   background: var(--mt-dark-blue);
 }
