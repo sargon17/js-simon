@@ -1,6 +1,9 @@
 const numbersRow = document.querySelector("#numbersRow");
+const timerDom = document.querySelector("#timerDom");
 
 let numbersToRemember = noRepeatNumbersGenerator(5);
+const timer = setInterval(updateTimer, 1000);
+let seconds = 30;
 
 displayNumbers(numbersToRemember, numbersRow);
 
@@ -25,4 +28,12 @@ function displayNumbers(numbersArray, place) {
     element.innerText = `${numbersArray[index]}`;
     place.appendChild(element);
   }
+}
+
+function updateTimer() {
+  if (seconds === 0) {
+    clearInterval(timer);
+  }
+  timerDom.innerText = `00:${seconds > 10 ? seconds : "0" + seconds}`;
+  seconds--;
 }
