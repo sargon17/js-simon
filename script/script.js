@@ -3,6 +3,7 @@ const inputsRow = document.querySelector("#inputsRow");
 const messagesRow = document.querySelector("#messagesRow");
 const timerDom = document.querySelector("#timerDom");
 const cardBtnSubmit = document.querySelector("#cardBtnSubmit");
+const cardBtnRestart = document.querySelector("#cardBtnRestart");
 const playBtn = document.querySelector("#playBtn");
 
 let numbersToRemember = [];
@@ -113,11 +114,38 @@ function compareUserAndRealNumbers(userNumbers, generatedNumbers) {
       rightNumbers++;
     }
   }
-  console.log(rightNumbers);
+  displayResult(rightNumbers, numbersQuantity);
 }
 function displayResult(rightNumbers, totalNumbers) {
   let coefficient = rightNumbers / totalNumbers;
-  console.log(coefficient);
+  switch (coefficient) {
+    case 0:
+      finalMessage("Damn, try again", rightNumbers, totalNumbers);
+      break;
+    case 1:
+      finalMessage("Wow, great memory skill", rightNumbers, totalNumbers);
+      break;
+    default:
+      finalMessage("Not bad, but try again", rightNumbers, totalNumbers);
+      break;
+  }
+  showToDisplay(messagesRow);
+}
+function finalMessage(mainMessage, rightNumbers, totalNumbers) {
+  let mainText = document.querySelector("#messagesRow > h3");
+  let secondaryText = document.querySelector("#messagesRow > p");
+
+  // Main message
+  mainText.innerHTML = mainMessage;
+  if (rightNumbers !== 0) {
+    // display how many numbers are right
+    secondaryText.innerHTML = `${rightNumbers} of ${totalNumbers} numbers ${
+      rightNumbers > 1 ? "are" : "is"
+    } right`;
+  } else {
+    // Display if there isn' right numbers
+    secondaryText = "No one number is right";
+  }
 }
 
 function hideFromDisplay(domElement) {
@@ -133,4 +161,5 @@ playBtn.addEventListener("click", () => {
 cardBtnSubmit.addEventListener("click", () => {
   const inputs = document.querySelectorAll(".numberInputs");
   readInputsValue(inputs);
+  hideFromDisplay(inputsRow);
 });
