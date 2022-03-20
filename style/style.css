@@ -212,7 +212,6 @@ p {
   padding: 4px;
   color: var(--mt-blue);
   text-align: center;
-  transition: all 1350ms ease-out;
 }
 .result-row {
   text-align: center;
