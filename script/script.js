@@ -115,6 +115,10 @@ function compareUserAndRealNumbers(userNumbers, generatedNumbers) {
   }
   console.log(rightNumbers);
 }
+function displayResult(rightNumbers, totalNumbers) {
+  let coefficient = rightNumbers / totalNumbers;
+  console.log(coefficient);
+}
 
 function hideFromDisplay(domElement) {
   domElement.classList.add("d-none");
