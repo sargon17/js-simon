@@ -65,7 +65,6 @@ function preGame() {
 }
 
 function startGame() {
-  // TODO set seconds to 30 seconds after testing
   seconds = timeToRemember - 1;
   // Generated NUmbers Array
   numbersToRemember = noRepeatNumbersGenerator(numbersQuantity);
@@ -154,7 +153,7 @@ function finalMessage(mainMessage, rightNumbers, totalNumbers) {
     } right`;
   } else {
     // Display if there isn' right numbers
-    secondaryText.innerHTML = "No one number is right";
+    secondaryText.innerHTML = "None of the number is right";
   }
 }
 
