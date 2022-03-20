@@ -11,6 +11,7 @@ let timer;
 // TODO set seconds to 30 seconds after testing
 let seconds = 1;
 let numbersQuantity = 5;
+let rightNumbers = 0;
 
 function randomNumberGenerator(min = 1, max = 100) {
   return Math.floor(Math.random() * (max - min) + min);
@@ -100,9 +101,19 @@ function createMultipleDomElements(parent, number, type, id) {
 }
 function readInputsValue(array) {
   for (let index = 0; index < array.length; index++) {
-    numbersInputedByUser.push(array[index].value);
+    numbersInputedByUser.push(parseInt(array[index].value));
   }
   console.log(numbersInputedByUser);
+  compareUserAndRealNumbers(numbersInputedByUser, numbersToRemember);
+}
+function compareUserAndRealNumbers(userNumbers, generatedNumbers) {
+  rightNumbers = 0;
+  for (let index = 0; index < numbersQuantity; index++) {
+    if (userNumbers[index] === generatedNumbers[index]) {
+      rightNumbers++;
+    }
+  }
+  console.log(rightNumbers);
 }
 
 function hideFromDisplay(domElement) {
