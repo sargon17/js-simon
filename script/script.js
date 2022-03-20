@@ -9,8 +9,7 @@ const playBtn = document.querySelector("#playBtn");
 let numbersToRemember = [];
 let numbersInputedByUser = [];
 let timer;
-// TODO set seconds to 30 seconds after testing
-let seconds = 1;
+let timeToRemember = 30;
 let numbersQuantity = 5;
 let rightNumbers = 0;
 
@@ -30,6 +29,7 @@ function noRepeatNumbersGenerator(quantity = 1) {
 }
 
 function displayNumbers(numbersArray, place) {
+  place.innerHTML = "";
   for (let index = 0; index < numbersArray.length; index++) {
     let element = document.createElement("p");
     element.innerText = `${numbersArray[index]}`;
@@ -42,24 +42,31 @@ function updateGameTimer() {
     clearInterval(timer);
     hideNumbers();
   }
-  timerDom.innerText = `00:${seconds > 10 ? seconds : "0" + seconds}`;
+  timerDom.innerText = `00:${seconds > 9 ? seconds : "0" + seconds}`;
   seconds--;
 }
 function preGame() {
-  let toGameSeconds = 3;
+  hideFromDisplay(numbersRow);
+  hideFromDisplay(inputsRow);
+
+  let mainMessage = document.querySelector("#messagesRow > h3");
+  let secondaryMessage = document.querySelector("#messagesRow > p");
+  mainMessage.innerHTML = "Game start in 3";
+  secondaryMessage.innerHTML = "";
+  let toGameSeconds = 2;
   let gameStart = setInterval(() => {
     if (toGameSeconds === 0) {
       clearInterval(gameStart);
       startGame();
     }
-    document.querySelector(
-      "#messagesRow > h3"
-    ).innerHTML = `Game start in ${toGameSeconds}`;
+    mainMessage.innerHTML = `Game start in ${toGameSeconds}`;
     toGameSeconds--;
   }, 1000);
 }
 
 function startGame() {
+  // TODO set seconds to 30 seconds after testing
+  seconds = timeToRemember - 1;
   // Generated NUmbers Array
   numbersToRemember = noRepeatNumbersGenerator(numbersQuantity);
   // TODO Cancel after testing
@@ -68,6 +75,8 @@ function startGame() {
   hideFromDisplay(messagesRow);
   displayNumbers(numbersToRemember, numbersRow);
   showToDisplay(numbersRow);
+  // Prevent timer bug
+  clearInterval(timer);
 
   // Timer settings
   timer = setInterval(updateGameTimer, 1000);
@@ -89,10 +98,11 @@ function hideNumbers() {
     "numberInputs"
   );
   showToDisplay(inputsRow);
-  cardBtnSubmit.classList.remove("opacity-0");
+  showToDisplay(cardBtnSubmit);
 }
 
 function createMultipleDomElements(parent, number, type, id) {
+  parent.innerHTML = "";
   for (let index = 1; index <= number; index++) {
     let element = document.createElement(`${type}`);
     element.id = `${id}-${index}`;
@@ -123,7 +133,7 @@ function displayResult(rightNumbers, totalNumbers) {
       finalMessage("Damn, try again", rightNumbers, totalNumbers);
       break;
     case 1:
-      finalMessage("Wow, great memory skill", rightNumbers, totalNumbers);
+      finalMessage("Wow, great memory", rightNumbers, totalNumbers);
       break;
     default:
       finalMessage("Not bad, but try again", rightNumbers, totalNumbers);
@@ -144,22 +154,31 @@ function finalMessage(mainMessage, rightNumbers, totalNumbers) {
     } right`;
   } else {
     // Display if there isn' right numbers
-    secondaryText = "No one number is right";
+    secondaryText.innerHTML = "No one number is right";
   }
 }
 
 function hideFromDisplay(domElement) {
   domElement.classList.add("d-none");
+  domElement.classList.add("opacity-0");
 }
 function showToDisplay(domElement) {
   domElement.classList.remove("d-none");
+  domElement.classList.remove("opacity-0");
 }
 
 playBtn.addEventListener("click", () => {
   preGame();
 });
+cardBtnRestart.addEventListener("click", () => {
+  preGame();
+  hideFromDisplay(cardBtnRestart);
+});
 cardBtnSubmit.addEventListener("click", () => {
-  const inputs = document.querySelectorAll(".numberInputs");
+  let inputs = document.querySelectorAll(".numberInputs");
   readInputsValue(inputs);
+
   hideFromDisplay(inputsRow);
+  hideFromDisplay(cardBtnSubmit);
+  showToDisplay(cardBtnRestart);
 });
