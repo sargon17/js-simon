@@ -13,10 +13,12 @@ let timeToRemember = 30;
 let numbersQuantity = 5;
 let rightNumbers = 0;
 
+// Generates a random number betwen the given range
 function randomNumberGenerator(min = 1, max = 100) {
   return Math.floor(Math.random() * (max - min) + min);
 }
 
+// chek for repeating numbers
 function noRepeatNumbersGenerator(quantity = 1) {
   let array = [];
   while (array.length < quantity) {
@@ -28,6 +30,7 @@ function noRepeatNumbersGenerator(quantity = 1) {
   return array;
 }
 
+// Create the elements to display the numbers
 function displayNumbers(numbersArray, place) {
   place.innerHTML = "";
   for (let index = 0; index < numbersArray.length; index++) {
@@ -37,6 +40,7 @@ function displayNumbers(numbersArray, place) {
   }
 }
 
+// update every second the game timer
 function updateGameTimer() {
   if (seconds === 0) {
     clearInterval(timer);
@@ -45,6 +49,8 @@ function updateGameTimer() {
   timerDom.innerText = `00:${seconds > 9 ? seconds : "0" + seconds}`;
   seconds--;
 }
+
+// pre game section, like a redy to go
 function preGame() {
   hideFromDisplay(numbersRow);
   hideFromDisplay(inputsRow);
@@ -64,12 +70,11 @@ function preGame() {
   }, 1000);
 }
 
+// display the numbers to remember & start the countdown
 function startGame() {
   seconds = timeToRemember - 1;
   // Generated NUmbers Array
   numbersToRemember = noRepeatNumbersGenerator(numbersQuantity);
-  // TODO Cancel after testing
-  console.log(numbersToRemember);
   // Display numbers
   hideFromDisplay(messagesRow);
   displayNumbers(numbersToRemember, numbersRow);
@@ -100,6 +105,7 @@ function hideNumbers() {
   showToDisplay(cardBtnSubmit);
 }
 
+// Function to create multiple elements on the DOM with an given ID
 function createMultipleDomElements(parent, number, type, id) {
   parent.innerHTML = "";
   for (let index = 1; index <= number; index++) {
@@ -109,13 +115,16 @@ function createMultipleDomElements(parent, number, type, id) {
     parent.appendChild(element);
   }
 }
+
+// Function that read all the values in inputs, and store them in an array
 function readInputsValue(array) {
   for (let index = 0; index < array.length; index++) {
     numbersInputedByUser.push(parseInt(array[index].value));
   }
-  console.log(numbersInputedByUser);
   compareUserAndRealNumbers(numbersInputedByUser, numbersToRemember);
 }
+
+// check how many numbers inputed by user correspond to the initial ones
 function compareUserAndRealNumbers(userNumbers, generatedNumbers) {
   rightNumbers = 0;
   for (let index = 0; index < numbersQuantity; index++) {
@@ -125,6 +134,7 @@ function compareUserAndRealNumbers(userNumbers, generatedNumbers) {
   }
   displayResult(rightNumbers, numbersQuantity);
 }
+// Display the final result to the player
 function displayResult(rightNumbers, totalNumbers) {
   let coefficient = rightNumbers / totalNumbers;
   switch (coefficient) {
@@ -140,6 +150,8 @@ function displayResult(rightNumbers, totalNumbers) {
   }
   showToDisplay(messagesRow);
 }
+
+// Additional function that help to display messages.
 function finalMessage(mainMessage, rightNumbers, totalNumbers) {
   let mainText = document.querySelector("#messagesRow > h3");
   let secondaryText = document.querySelector("#messagesRow > p");
@@ -157,10 +169,13 @@ function finalMessage(mainMessage, rightNumbers, totalNumbers) {
   }
 }
 
+// Additional function that hide from the user dom elements
 function hideFromDisplay(domElement) {
   domElement.classList.add("d-none");
+  // The opacity is here tho help animations
   domElement.classList.add("opacity-0");
 }
+// Additional function that did pretty the same bat insted of hiding it shown dom's elements
 function showToDisplay(domElement) {
   domElement.classList.remove("d-none");
   domElement.classList.remove("opacity-0");
@@ -176,7 +191,6 @@ cardBtnRestart.addEventListener("click", () => {
 cardBtnSubmit.addEventListener("click", () => {
   let inputs = document.querySelectorAll(".numberInputs");
   readInputsValue(inputs);
-
   hideFromDisplay(inputsRow);
   hideFromDisplay(cardBtnSubmit);
   showToDisplay(cardBtnRestart);
