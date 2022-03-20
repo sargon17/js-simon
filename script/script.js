@@ -6,8 +6,11 @@ const cardBtnSubmit = document.querySelector("#cardBtnSubmit");
 const playBtn = document.querySelector("#playBtn");
 
 let numbersToRemember = [];
+let numbersInputedByUser = [];
 let timer;
-let seconds = 5;
+// TODO set seconds to 30 seconds after testing
+let seconds = 1;
+let numbersQuantity = 5;
 
 function randomNumberGenerator(min = 1, max = 100) {
   return Math.floor(Math.random() * (max - min) + min);
@@ -56,7 +59,8 @@ function preGame() {
 
 function startGame() {
   // Generated NUmbers Array
-  numbersToRemember = noRepeatNumbersGenerator(5);
+  numbersToRemember = noRepeatNumbersGenerator(numbersQuantity);
+  // TODO Cancel after testing
   console.log(numbersToRemember);
   // Display numbers
   hideFromDisplay(messagesRow);
@@ -76,8 +80,29 @@ function hideNumbers() {
 
   //   Change the window to inputs
   hideFromDisplay(numbersRow);
+  createMultipleDomElements(
+    inputsRow,
+    numbersQuantity,
+    "input",
+    "numberInputs"
+  );
   showToDisplay(inputsRow);
   cardBtnSubmit.classList.remove("opacity-0");
+}
+
+function createMultipleDomElements(parent, number, type, id) {
+  for (let index = 1; index <= number; index++) {
+    let element = document.createElement(`${type}`);
+    element.id = `${id}-${index}`;
+    element.className = `${id}`;
+    parent.appendChild(element);
+  }
+}
+function readInputsValue(array) {
+  for (let index = 0; index < array.length; index++) {
+    numbersInputedByUser.push(array[index].value);
+  }
+  console.log(numbersInputedByUser);
 }
 
 function hideFromDisplay(domElement) {
@@ -89,4 +114,8 @@ function showToDisplay(domElement) {
 
 playBtn.addEventListener("click", () => {
   preGame();
+});
+cardBtnSubmit.addEventListener("click", () => {
+  const inputs = document.querySelectorAll(".numberInputs");
+  readInputsValue(inputs);
 });
